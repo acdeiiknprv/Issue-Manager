@@ -13,6 +13,7 @@ const IssueEditModal = ({ issue, refreshOnAction }: { issue: Issue, refreshOnAct
     const onSave = async (updatedIssue: Issue) => {
         if (issue._id === undefined) return;
         await editIssue(issue._id, updatedIssue);
+        refreshOnAction();
     };
 
     return (

@@ -6,6 +6,7 @@ import { Issue } from "../../interfaces/issue";
 const IssueCreateModal = ({ open, onClose, refreshOnAction }: { open: boolean, onClose: () => void, refreshOnAction: () => void }) => {
     const onSave = async (newIssue: Issue) => {
         await createIssue(newIssue);
+        refreshOnAction();
     };
 
     return (
