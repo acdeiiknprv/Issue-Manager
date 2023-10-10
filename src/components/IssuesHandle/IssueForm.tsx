@@ -9,9 +9,10 @@ interface IssueFormProps {
     onClose: () => void;
     title: string;
     submitButtonText: string;
+    isLoading?: boolean;
 }
 
-const IssueForm = React.forwardRef<HTMLDivElement, IssueFormProps>(({ issue, onSubmit, onClose, title, submitButtonText }, ref) => {
+const IssueForm = React.forwardRef<HTMLDivElement, IssueFormProps>(({ issue, onSubmit, onClose, title, submitButtonText, isLoading }, ref) => {
     const [name, setName] = useState(issue ? issue.name : "");
     const [description, setDescription] = useState(issue ? issue.description : "");
     const [dueDate, setDueDate] = useState(issue ? new Date(issue.dueDate) : new Date());
@@ -71,8 +72,13 @@ const IssueForm = React.forwardRef<HTMLDivElement, IssueFormProps>(({ issue, onS
                     }}
                 />
                 <div style={{ display: "flex", justifyContent: "space-around" }}>
-                    <Button variant="contained" color="primary" type="submit">
-                        {submitButtonText}
+                    <Button
+                        type="submit"
+                        variant="contained"
+                        color="primary"
+                        disabled={isLoading}  // <-- disable the button if loading
+                    >
+                        {isLoading ? 'Saving...' : submitButtonText}
                     </Button>
                     <Button variant="contained" onClick={onClose}>
                         Cancel

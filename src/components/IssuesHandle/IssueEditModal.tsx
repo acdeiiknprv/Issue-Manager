@@ -6,14 +6,22 @@ import IssueForm from "./IssueForm";
 
 const IssueEditModal = ({ issue, refreshOnAction }: { issue: Issue, refreshOnAction: () => void }) => {
     const [show, setShow] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
     const onSave = async (updatedIssue: Issue) => {
         if (issue._id === undefined) return;
-        await editIssue(issue._id, updatedIssue);
-        refreshOnAction();
+        setIsLoading(true);
+        try {
+            await editIssue(issue._id, updatedIssue);
+            refreshOnAction();
+        } catch (error) {
+            console.error("Error while editing issue:", error);
+        } finally {
+            setIsLoading(false);
+        }
     };
 
     return (
@@ -29,6 +37,7 @@ const IssueEditModal = ({ issue, refreshOnAction }: { issue: Issue, refreshOnAct
                     onClose={handleClose}
                     title="Edit Issue"
                     submitButtonText="Save Changes"
+                    isLoading={isLoading}
                 />
             </Modal>
         </>
