@@ -3,7 +3,7 @@ import { Issue } from "../interfaces/issue";
 const createIssue = async (newIssue: Issue) => {
     newIssue.createDate = new Date();
     try {
-        const response = await fetch(`http://localhost:3000/issues`, {
+        const response = await fetch(`https://issue-manager-api.vercel.app/issues`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

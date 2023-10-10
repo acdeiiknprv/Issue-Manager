@@ -1,5 +1,5 @@
 export function getIssues() {
-    return fetch('http://localhost:3000/issues')
+    return fetch('https://issue-manager-api.vercel.app/issues')
         .then(response => response.json())
         .then(data => {
             return data;
@@ -10,7 +10,7 @@ export function getIssues() {
 }
 
 export function getIssueById(issueId: string) {
-    return fetch(`http://localhost:3000/issues/${issueId}`)
+    return fetch(`https://issue-manager-api.vercel.app/issues/${issueId}`)
         .then(response => response.json())
         .then(data => {
             return data;
