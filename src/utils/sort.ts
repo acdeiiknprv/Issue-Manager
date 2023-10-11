@@ -13,3 +13,13 @@ export function sortByCreationDate(a: Issue, b: Issue): number {
 export function sortByName(a: Issue, b: Issue): number {
     return a.name.localeCompare(b.name);
 }
+
+export function sortByDueDate(a: Issue, b: Issue): number {
+    if (!a.dueDate || !b.dueDate) return 0;
+    const dateA = new Date(a.dueDate);
+    const dateB = new Date(b.dueDate);
+
+    if (dateA > dateB) return 1;
+    if (dateA < dateB) return -1;
+    return 0;
+}
