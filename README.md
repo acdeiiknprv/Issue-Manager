@@ -1,46 +1,59 @@
-# Getting Started with Create React App
+# Issues Tracker API
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Description
+This project is a FrontEnd App for users to be able to CRUD issues.
 
-## Available Scripts
+## Features
+- **Create Issue:**  Allows users to create issues.
+- **Edit Issue:** Allows users to edit an issue.
+- **Delete Issue:** Allows users to delete an issue.
+- **Status:** Allows users to see when their issue is due, with the date and status.
+- **Sort:** Allows users to sort issues by Creation Date or by Name
 
-In the project directory, you can run:
+## Issue
+An Issue is an object containing:
+- **name:** String, must be longer than 3 characters
+- **description:** String, must be longer than 5 characters
+- **dueDate:** Date
 
-### `npm start`
+## Prerequisites
+Before you begin, ensure you have met the following requirements:
+- You have installed Node.js.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Installation and Setup
+1. **Clone the repository**
+   ```sh
+   git clone https://github.com/acdeiiknprv/Issue-Manager.git
+   ```
+2. **Navigate to the project directory**
+   ```sh
+   cd ./Issue-Manager/
+   ```
+3. **Install dependencies**
+    ```sh
+    npm install
+    ```
+4. **Start the application**
+  You have the
+    ```sh
+    npm start
+    ```
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## API Endpoints
+This application is using this [API](https://github.com/acdeiiknprv/Issues-Tracker-API/tree/Issue-manager-api)
 
-### `npm test`
+## Technologies Used
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- [React.js](https://react.dev/)
+- [Material UI](https://mui.com/)
+- [TypeScript](https://www.typescriptlang.org/)
 
-### `npm run build`
+## Hosting
+This project has been hosted on Vercel.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Access the application
+To access the application from Vercel, follow this [link]().
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Contact
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+**Project Maintainer:** Kevin Picard - [kevin.picard.au@gmail.com](mailto:kevin.picard.au@gmail.com) - [<a href="tel:0475564651">0475 564 651</a>]
