@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import { Button, Modal } from '@mui/material';
 import deleteIssue from '../../services/deleteIssues';
 
-const IssueDeleteModal = ({ issueId, refreshOnAction }: {issueId: string, refreshOnAction: () => void}) => {
+const IssueDeleteModal = ({ issueId, refreshOnAction }: { issueId: string, refreshOnAction: () => void }) => {
     const [open, setOpen] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
 
     const handleOpen = () => {
         setOpen(true);
@@ -14,9 +15,17 @@ const IssueDeleteModal = ({ issueId, refreshOnAction }: {issueId: string, refres
     };
 
     const handleDelete = async () => {
-        await deleteIssue(issueId);
-        handleClose();
-        refreshOnAction();
+        setIsLoading(true);
+        try {
+            await deleteIssue(issueId);
+            refreshOnAction();
+        } catch (error) {
+            console.error("Error while editing issue:", error);
+        } finally {
+            setIsLoading(false);
+            handleClose();
+        }
+
     };
 
     return (
@@ -29,8 +38,8 @@ const IssueDeleteModal = ({ issueId, refreshOnAction }: {issueId: string, refres
                     <h2>Are you sure you want to delete this issue?</h2>
                     <p>This action cannot be undone.</p>
                     <div style={{ display: "flex", justifyContent: "space-between" }}>
-                        <Button variant="contained" color="secondary" onClick={handleDelete}>
-                            Yes, Delete
+                        <Button variant="contained" color="secondary" onClick={handleDelete} disabled={isLoading}>
+                            {isLoading ? 'Saving...' : 'Yes, Delete'}
                         </Button>
                         <Button variant="contained" onClick={handleClose}>
                             Cancel

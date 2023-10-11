@@ -8,9 +8,10 @@ import { Issue } from '../interfaces/issue';
 import { sortByCreationDate, sortByName } from '../utils/sort';
 import { getStatus } from '../utils/status';
 import { Box, Typography } from '@mui/material';
+import { CircularProgress } from '@mui/material';
 
 function FormatIssues() {
-    const { issues, handleRefresh } = useIssues();
+    const { issues, handleRefresh, loading } = useIssues();
     const { showCreateModal, handleShowModal, handleCloseModal } = useCreateModal();
     const [sortType, setSortType] = useState<'CreationDate' | 'name'>('CreationDate');
     const [searchTerm, setSearchTerm] = useState<string>("");
@@ -24,6 +25,7 @@ function FormatIssues() {
     sortedIssues = [...filteredIssues].sort(
         sortType === 'CreationDate' ? sortByCreationDate : sortByName
     );
+    if (sortType === 'CreationDate') sortedIssues.reverse();
 
     return (
         <div>
@@ -36,10 +38,12 @@ function FormatIssues() {
                 onChange={(e) => setSearchTerm(e.target.value)}
             />
             <AddButton onClick={handleShowModal} />
-            {sortedIssues.length === 0 ? <NoIssues /> :
-                sortedIssues.map(issue => (
-                    <IssueDisplay key={issue._id} issue={issue} onAction={handleRefresh} />
-                ))}
+            {loading ? <CircularProgress /> :
+                sortedIssues.length === 0 ? <NoIssues /> :
+                    sortedIssues.map(issue => (
+                        <IssueDisplay key={issue._id} issue={issue} onAction={handleRefresh} />
+                    ))
+            }
             {showCreateModal ? <IssueCreateModal open={showCreateModal} onClose={handleCloseModal} refreshOnAction={handleRefresh} /> : null}
         </div>
     );

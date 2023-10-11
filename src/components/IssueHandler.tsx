@@ -6,12 +6,15 @@ import { Issue } from '../interfaces/issue';
 export function useIssues() {
     const [issues, setIssues] = useState<Issue[]>([]);
     const [refresh, setRefresh] = useState(false);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         async function fetchIssues() {
+            setLoading(true);
             const response = await getIssues();
             if (response)
                 setIssues(response.reverse());
+            setLoading(false);
         }
         fetchIssues();
     }, [refresh]);
@@ -20,7 +23,7 @@ export function useIssues() {
         setRefresh(prev => !prev);
     }
 
-    return { issues, handleRefresh };
+    return { issues, handleRefresh, loading };
 }
 
 export function useCreateModal() {
