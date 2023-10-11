@@ -20,6 +20,9 @@ const IssueForm = React.forwardRef<HTMLDivElement, IssueFormProps>(({ issue, onS
     const isFormValid = () => {
         return name.trim() !== "" && description.trim() !== "" && dueDate instanceof Date;
     };
+    const isValidDate = (d: Date) => {
+        return d instanceof Date && !isNaN(d.getTime());
+    };
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
@@ -65,8 +68,13 @@ const IssueForm = React.forwardRef<HTMLDivElement, IssueFormProps>(({ issue, onS
                     variant="outlined"
                     fullWidth
                     margin="normal"
-                    value={dueDate instanceof Date ? dueDate.toISOString().split('T')[0] : ''}
-                    onChange={(event) => setDueDate(new Date(event.target.value))}
+                    value={isValidDate(dueDate) ? dueDate.toISOString().split('T')[0] : ''}
+                    onChange={(event) => {
+                        const newDate = new Date(event.target.value);
+                        if (isValidDate(newDate)) {
+                            setDueDate(newDate);
+                        }
+                    }}
                     InputLabelProps={{
                         shrink: true,
                     }}
