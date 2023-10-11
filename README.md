@@ -52,7 +52,7 @@ This application is using this [API](https://github.com/acdeiiknprv/Issues-Track
 This project has been hosted on Vercel.
 
 ### Access the application
-To access the application from Vercel, follow this [link]().
+To access the application from Vercel, follow this [link](https://issue-manager-eta.vercel.app/).
 
 ## Contact
 
